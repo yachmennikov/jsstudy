@@ -1,22 +1,18 @@
-let num = 266219,
-    output = [];
+let num = 266219;
 
-num = num.toString();
+num = num.toString().split('');
+console.log(num);
 
-for (let i = 0; i < num.length; i++) {
-    output.push(num[i]);
-}
-
-output = output.reduce( function(sum, current) {
+num = num.reduce( function(sum, current) {
     return sum * current;
 });
 
-console.log(output);
+console.log(num);
 
-output = output ** 3;
-console.log(output);
-output = output.toString();
-console.log(output[0] + output[1]);
+num = num ** 3;
+console.log(num);
+num = num.toString().slice(0, 2);
+console.log(num);
 
 
 
