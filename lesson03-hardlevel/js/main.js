@@ -27,25 +27,17 @@ let lang = confirm('Вы используете русский язык?'),
 
 
 if (lang == true) {
-   for (let i = 0; i < days[0].length; i++) {
-       console.log(days[0][i]);
-    };
+       console.log(days[0]);
     } else {
-    for (let i = 0; i < days[1].length; i++) {
-        console.log(days[1][i]);
-    }
+        console.log(days[1]);
 };
 
 console.log(' ');
 
 switch (lang2) {
-    case true :  for (let i = 0; i < days[0].length; i++) {
-                 console.log(days[0][i]);
-                 };
+    case true :  console.log(days[0]);            
     break;
-    default :   for (let i = 0; i < days[1].length; i++) {
-                console.log(days[1][i]);
-                };
+    default :    console.log(days[1]);          
     break;
 };
 
@@ -56,8 +48,9 @@ console.log(days[1]);
 
 let namePerson = prompt('Введите ваше имя');
 
-namePerson == 'Артем' ? console.log('Директор') : console.log('Студент');
-namePerson == 'Максим' ? console.log('преподаватель') : console.log('Студент');
+namePerson == 'Артем' ? console.log('Директор') 
+              : namePerson == 'Максим' ? console.log('преподаватель') 
+              : console.log('студент');
 
 
 
