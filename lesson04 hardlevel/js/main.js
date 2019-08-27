@@ -1,8 +1,9 @@
 'use strict';
 
 function getAnything(anyThing) {
-    if (anyThing !== 'string') {
+    if (typeof anyThing !== 'string') {
         alert('Введи корректные данные');
+        break;
     }
 
     anyThing.trim();
