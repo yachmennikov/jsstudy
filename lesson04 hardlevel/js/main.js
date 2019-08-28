@@ -1,15 +1,17 @@
 'use strict';
+let anyThing = prompt('Введи что-нибудь');
 
-function getAnything(anyThing) {
-    if (typeof anyThing !== 'string') {
-        alert('Введи корректные данные');
-        break;
+function getAnything(thing) {
+    if (typeof thing !== 'string') {
+        alert('Введите корректные данные');   
     }
 
-    anyThing.trim();
-
-    if(anyThing.length > 30) {
-        anyThing.substring(0, 29);
+    thing = thing.trim();
+    console.log(thing)
+    if(thing.length > 30) {
+        thing = thing.substring(0, 29);
     }
-
+    console.log(thing)
 }
+
+getAnything(anyThing);
