@@ -8,9 +8,9 @@ function getAnything(thing) {
     thing = thing.trim();
     console.log(thing)
     if(thing.length > 30) {
-        parseText(thing, 30)
+        thing = parseText(thing, 30);
     }
-    console.log(parseText(thing, 30));
+    console.log(thing);
 }
 
 let parseText = function(text, limit){
@@ -26,4 +26,4 @@ let parseText = function(text, limit){
         return text;
   };
 
-getAnything('Введи значение');
+getAnything('Введи значение ddddddddddddddddddddddddddddddddd');
