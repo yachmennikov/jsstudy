@@ -27,24 +27,30 @@ let expenses,
    
   
     let getExpensesMonth = function () {
-            let sum = 0;
+            let sum = 0,
+                sum2 = 0
             for (let i = 0; i < 2; i++) {
                 if (i === 0) {
                     expenses = prompt('Введите обязательную статью расходов', 'аренда жилья');
+                    do {
+                        sum = prompt('Сколько вам требуется средств?', 7000);
+                    }  while (isNaN(sum) || sum === '' || sum === null || sum === Infinity);  
                 };
                 if (i === 1) {
                     expenses2 = prompt('Введите обязательную статью расходов', 'питание');
+                    do {
+                        sum2 = prompt('Сколько вам требуется средств?', 7000);
+                    }  while (isNaN(sum) || sum === '' || sum === null || sum === Infinity);  
                 };
-                do {
-                    sum = prompt('Сколько вам требуется средств?', 7000);
-                }  while (isNaN(sum) || sum === '' || sum === null || sum === Infinity);  
+               
             }
-            return sum;
+            return +sum + (+sum2);
         };
 
    
 
 let expensesAmount = getExpensesMonth();
+console.log(expensesAmount);
 
 
 
