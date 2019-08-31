@@ -28,7 +28,7 @@ let expenses,
   
     let getExpensesMonth = function () {
             let sum = 0,
-                sum2 = 0
+                sum2 = 0;
             for (let i = 0; i < 2; i++) {
                 if (i === 0) {
                     expenses = prompt('Введите обязательную статью расходов', 'аренда жилья');
