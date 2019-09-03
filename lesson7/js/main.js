@@ -19,14 +19,43 @@ let appData = {
     addExpenses: [],
     expensesMonth: 0,
     deposite: false,
+    percentDeposite: 0,
+    moneyDeposite: 0,
     mission: 50000,
     period: 3,
     asking: function () {
-       
-    
-        let addExpenses = prompt('Перечислите расходы через запятую');
+
+         
+        if (confirm('Есть ли у вас дополнительный заработок?') === true) {
+            let itemIncome,
+                cashIncome;
+                do {
+                    itemIncome = prompt('Какой у вас дополнительный заработок?', 'фриланс');
+                } while (itemIncome === '' || itemIncome === null);
+                do {
+                    cashIncome = prompt('Сколько вы зарабатываете на этом', 10000);
+                }  while (isNaN(cashIncome) || cashIncome === '' || 
+                cashIncome === null || cashIncome === Infinity);
+                appData.income[itemIncome] = +cashIncome;
+               
+        };
+
+        let addExpenses;
+           
+        do {
+            addExpenses = prompt('Перечислите расходы через запятую');
+        } while (addExpenses === '' || addExpenses === null);
+
         appData.addExpenses = addExpenses.toLowerCase().split(', ');
+        for (var i = 0; i < appData.addExpenses.length; i++) {
+           
+            appData.addExpenses[i] = ' ' + appData.addExpenses[i].charAt(0).toUpperCase() + appData.addExpenses[i].substring(1);
+        };
+
         appData.deposite = confirm('Есть ли у вас депозит в банке?');
+        if (appData.deposite === true) {
+            appData.getInfoDeposite();
+        }
         for (let i = 0; i < 2; i++) {
             let itemExpenses = prompt('Введите обязательнуую строку расходов', 'аренда жилья');
             let cashExpenses;
@@ -60,13 +89,36 @@ let appData = {
         } else {
             return ('Что-то пошло не так');
         }
+    },
+    getInfoDeposite: function () {
+        if(appData.deposite) {
+            do {
+            appData.percentDeposite = prompt('Какой годовой процент?', 10);
+            } while (isNaN(appData.percentDeposite) || appData.percentDeposite === '' || 
+            appData.percentDeposite === null || appData.percentDeposite === Infinity);
+            do {
+             appData.moneyDeposite = prompt('Какая сумма заложена', 10000);
+            } while (isNaN( appData.moneyDeposite) ||  appData.moneyDeposite === '' || 
+            appData.moneyDeposite === null ||  appData.moneyDeposite === Infinity);
+           
+        }
+    },
+    calcSaveMoney: function () {
+        return appData.budgetMonth * appData.period;
     }
-  
+   
 };
 
 appData.asking();
 appData.getExpensesMonth();
 appData.getBudget();
+
+
+
+
+
+
+
 
 console.log('Расходы за месяц:' + appData.expensesMonth);
 
