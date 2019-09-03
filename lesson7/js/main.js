@@ -4,7 +4,7 @@ let money,
     start = function () {
         do {
             money = prompt('Ваш ежемесячный доход?', 50000);
-        }  while (isNaN(money) || money === '' || money === null); 
+        }  while (isNaN(money) || money === '' || money === null || money === Infinity); 
     };
 
     start();
@@ -31,7 +31,7 @@ let appData = {
                 cashIncome;
                 do {
                     itemIncome = prompt('Какой у вас дополнительный заработок?', 'фриланс');
-                } while (itemIncome === '' || itemIncome === null);
+                } while (itemIncome === '' || itemIncome === null || isNaN(itemIncome) === false);
                 do {
                     cashIncome = prompt('Сколько вы зарабатываете на этом', 10000);
                 }  while (isNaN(cashIncome) || cashIncome === '' || 
@@ -44,7 +44,7 @@ let appData = {
            
         do {
             addExpenses = prompt('Перечислите расходы через запятую');
-        } while (addExpenses === '' || addExpenses === null);
+        } while (addExpenses === '' || addExpenses === null || isNaN(addExpenses) === false);
 
         appData.addExpenses = addExpenses.toLowerCase().split(', ');
         for (var i = 0; i < appData.addExpenses.length; i++) {
@@ -57,8 +57,12 @@ let appData = {
             appData.getInfoDeposite();
         }
         for (let i = 0; i < 2; i++) {
-            let itemExpenses = prompt('Введите обязательнуую строку расходов', 'аренда жилья');
-            let cashExpenses;
+            let itemExpenses,
+                cashExpenses;
+            do {
+                itemExpenses = prompt('Введите обязательнуую строку расходов', 'аренда жилья');
+            } while (itemExpenses === '' || itemExpenses === null || isNaN(itemExpenses) === false);
+            
             do {
                 cashExpenses = prompt('Во сколько это обойдется?', 5000);
             }   while (isNaN(cashExpenses) || cashExpenses === '' || 
