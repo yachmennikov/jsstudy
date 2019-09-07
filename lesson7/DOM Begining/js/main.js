@@ -23,7 +23,7 @@ books.insertBefore(booksList[4], booksList[5]);
 books.insertBefore(booksList[3], booksList[5]);
 
 
-document.body.style.backgroundImage = 'url(./image/adv.jpg)';
+document.body.style.backgroundImage = 'url(./image/you-dont-know-js.jpg)';
 let title = document.querySelectorAll('.book h2 a');
 // title[4].textContent = 'Книга 3. this и Прототипы Объектов';
 
