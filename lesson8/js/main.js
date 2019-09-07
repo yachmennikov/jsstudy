@@ -91,8 +91,8 @@ addExpensesBlock: () => {
     }
 
 },
-getExpenses: () => {
-        incomeItems.forEach( (item) => {
+getExpenses: function () {
+        expensesItems.forEach( (item) => {
             let itemExpenses = item.querySelector('.expenses-title').value,
                 cashExpenses = item.querySelector('.expenses-amount').value;
             if (itemExpenses !== '' && cashExpenses !== '') {
