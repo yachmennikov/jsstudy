@@ -178,11 +178,11 @@ let appData = {
         }
     },
     calcPeriod: () => {
-        return this.budgetMonth * periodSelect.value;
+        return this.budgetMonth * +(periodSelect.value);
     },
     periodChoice: function () {
         let periodAmount = document.querySelector('.period-amount');
-        periodAmount.textContent = periodSelect.value;
+        periodAmount.textContent = +periodSelect.value;
     },
     reset: () => {
         budgetMonthValue.value = '';
@@ -198,7 +198,7 @@ let appData = {
         if ( start.style.display = 'block') {
             allInputs.forEach( (item) => {
                 item.value = '';
-                item.setAttribute('disabled', 'disabled');
+                item.removeAttribute('disabled', 'disabled');
             });
 
         }
