@@ -222,9 +222,3 @@ expensesPlus.addEventListener('click', appData.addExpensesBlock);
 periodSelect.addEventListener('input', appData.periodChoice);
 cancel.addEventListener('click', appData.reset.bind(appData));
 
-
-
-let arr = [1, 2, 4, 5];
-console.log(arr.__proto__);
-
-
