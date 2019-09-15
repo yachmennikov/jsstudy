@@ -210,11 +210,13 @@ let incomeTitlesAll = document.querySelectorAll('.income-title'),
 	expensesTitlesAll = document.querySelectorAll('.expenses-title'),
 	incomeAmountAll = document.querySelectorAll('.income-amount'),
 	expensesAmountAll = document.querySelectorAll('.expenses-amount');
+	
 
 	incomeTitlesAll.forEach( item => item.value = '');
 	expensesTitlesAll.forEach( item => item.value = '');
 	incomeAmountAll.forEach( item => item.value = '');
 	expensesAmountAll.forEach( item => item.value = '');
+
 
 	incomeTitlesAll.forEach( item => item.removeAttribute('disabled', 'true') );
 	expensesTitlesAll.forEach( item => item.removeAttribute('disabled', 'true') );
@@ -286,3 +288,4 @@ appData.eventListener();
 
 
 start.setAttribute('disabled', 'true');
+
