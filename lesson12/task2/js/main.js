@@ -5,19 +5,29 @@ window.addEventListener('DOMContentLoaded', function () {
 
 let hello = 'Добрый день, сегодня: ',
     today = new Date(),
-    day = today.getDate(),
-    month = today.getMonth() + 1,
-    year = today.getFullYear(),
-    dayOfWeek = today.getDay(),
-    dayToday = 0;
+    seconds = today.getSeconds(),
+    minutes = today.getMinutes(),
+    hours = today.getHours(),
+    dayOfWeek = { weekday: 'long'},
+    currentMoment = today.toLocaleDateString('ru-RU', dayOfWeek);
     
-   
+    
+    let countDown = function (deadline) {
+       
+        let dateStop = new Date(deadline).getTime(),
+            dateNow = new Date().getTime();
+            let timeRemaining = Math.ceil( (dateStop - dateNow) / 86400000);
+            return timeRemaining;
+    }
 
+//    countDown('01 january 2020');
 
-
-    let now = 'Tекущее время:' + day + ':' + month + ':' + year;
+    let now = `Добрый день, сегодня ${currentMoment}, текущее время ${hours}:${minutes}:${seconds} PM 
+    до нового года осталось ${countDown('01 january 2020')} дней`;
     document.write(now);
-    console.log();
+   
+    
+
    
     
  
