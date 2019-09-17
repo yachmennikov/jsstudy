@@ -18,29 +18,32 @@ window.addEventListener('DOMContentLoaded', function () {
 
                     return {timeRemaining, hours, minutes, seconds}
             };
+
+            function conditions() {
+                if (timer.hours < 10) timer.hour = "0" + timer.hours;
+                if (timer.minutes < 10) timer.minutes  = "0" + timer.minutes;
+                if (timer.seconds < 10) timer.seconds  = "0" + timer.seconds;  
+            };
            
-            function updateClock () {
+            let countDown = setInterval( () => {
                 let timer = getTimeRemaining();
-                    if (timer.hours < 10) timer.hour = "0" + timer.hours;
-                    if (timer.minutes < 10) timer.minutes  = "0" + timer.minutes;
-                    if (timer.seconds < 10) timer.seconds  = "0" + timer.seconds;
-                    timerHours.textContent = timer.hours;
-                    timerMinutes.textContent = timer.minutes;
-                    timerSeconds.textContent = timer.seconds;
-                if(timer.timeRemaining > 0) {
-                    setInterval(updateClock, 1000);
-                   
-                }  else if (timer.timeRemaining < 0) {
+                if (timer.timeRemaining < 0) {
                     clearInterval(updateClock);
                     timerHours.textContent = '00';
                     timerMinutes.textContent = '00';
                     timerSeconds.textContent = '00';
-                }; 
-            };
-            updateClock();
-    };
+                };
 
-    countTimer('17 september 2019');
+                conditions();
+                   
+                    timerHours.textContent = timer.hours;
+                    timerMinutes.textContent = timer.minutes;
+                    timerSeconds.textContent = timer.seconds;
+
+            }, 1000);     
+    };
+    
+    countTimer('19 september 2019');
    
 
    
