@@ -23,7 +23,7 @@ window.addEventListener('DOMContentLoaded',  () => {
                     let timer = getTimeRemaining();
 
                     const conditions = (item) => {
-                        return item < 10 ? "0" + item : item;      
+                        return item < 10 ? '0' + item : item;      
                     };
 
                     if (timer.timeRemaining < 0) {
@@ -57,24 +57,72 @@ window.addEventListener('DOMContentLoaded',  () => {
         };
         toggleMenu();
 
+       
         // popUp
         const togglePopUp = () => {
             const popup = document.querySelector('.popup'),
                   popupBtn = document.querySelectorAll('.popup-btn'),
-                  popupClose = document.querySelector('.popup-close');
-                  requestAnimationFrame(togglePopUp);
+                  popupClose = document.querySelector('.popup-close'),
+                  popupContent = document.querySelector('.popup-content');
+                  
+                  popupBtn.forEach( item => item.addEventListener('click', () => { 
+                      popup.style.display = 'block';
+                      animate();
+                 }) 
+            );
+                  popupClose.addEventListener('click', (event) => { 
+                      event.stopPropagation();   
+                      popup.style.display = 'none' } );
+                  popup.addEventListener('click', () => { popup.style.display = 'none' } );
+                  popupContent.addEventListener('click', (event) => { 
+                      event.stopPropagation();  
+                      popup.style.display = 'block' });
 
-
-                  popupBtn.forEach( item => item.addEventListener('click', () => { popup.style.display = 'block' }) );
-                  popupClose.addEventListener('click', () => { popup.style.display = 'none' } );
+            // Animation
+            let count = 0,
+                interval;
+            const animate = () => {
+                if (window.innerWidth > 612) {
+                    interval = requestAnimationFrame(animate);
+                    count +=5;
+                    if (count < 175) {
+                        popupContent.style.top = count + 'px';
+                    } else {
+                        cancelAnimationFrame(interval);
+                        count = 0;
+                    }
+                } else {
+                    cancelAnimationFrame(interval);
+                }
+            };
         };
         togglePopUp();
 
-        function step() {
-            requestAnimationFrame(step);
-            // описываем один шаганимации тут
-          }
-          step();
+        // Кусок кода который почемуто не работает
+        // аналогичная ситуация с в меню
+        // причем не важно есть ли у ссылки якорь типа (href="#service-block") или нет
+        
+        const scrollDown = () => {
+            const scrollBtn = document.querySelector('main > a');
+
+            scrollBtn.addEventListener('click', () => {
+                window.scrollBy({ top: 5600, behavior: 'smooth' });
+            })
+        };
+        scrollDown();
+        
+        
+        
+       
+           
+     
+
+   
+
+
+
+
+       
    
    
 
