@@ -43,35 +43,26 @@ window.addEventListener('DOMContentLoaded',  () => {
       
       countTimer('21 september 2019');
 
-    // burger menu
-      const toggleMenu = () => {
+        // burger menu
+        const toggleMenu = () => {
+            const btnMenu = document.querySelector('.menu'),
+                  menu = document.querySelector('menu'),
+                  closeBtn = document.querySelector('.close-btn'),
+                  menuItems = menu.querySelectorAll('ul > li');
+                  
+                //  
 
-        const btnMenu = document.querySelector('.menu'),
-            menu = document.querySelector('menu'),
-            body = document.querySelector('body');
-        
-        
-            btnMenu.addEventListener('click', () => {
-                menu.classList.add('active-menu');
-            });
-        
-            body.addEventListener(('click'), (event) => {
-            let target = event.target;
-        
-            if(target.closest('menu') && menu.classList.contains('active-menu')) { 
-                if(target.tagName !== 'MENU') {
-                    if(target.tagName === 'A'){ 
-                        menu.classList.remove('active-menu');
-                    }
-                }
-            } else if (!target.closest('menu') && !target.closest('.menu')) {
-                menu.classList.remove('active-menu');
-            }
-        
-        });
-    };
+            const handlerMenu = () => {
+                menu.classList.toggle('active-menu');
+            };
+                  btnMenu.addEventListener('click', handlerMenu);
+                  closeBtn.addEventListener('click', handlerMenu);
+                  menuItems.forEach( item => item.addEventListener('click', handlerMenu) );
+        };       
+              
 
-    toggleMenu();
+       
+        toggleMenu();
 
        
         // popUp
@@ -150,10 +141,8 @@ window.addEventListener('DOMContentLoaded',  () => {
         const slider = () => {
             const slide = document.querySelectorAll('.portfolio-item'),
                   btn = document.querySelectorAll('.portfolio-btn'),
-                  dots = document.querySelector('.portfolio-dots'),
+                  dot = document.querySelectorAll('.dot'),
                   slider = document.querySelector('.portfolio-content');
-                
-                  
 
             let currentSlide = 0,
                 interval;
@@ -167,38 +156,21 @@ window.addEventListener('DOMContentLoaded',  () => {
                 elem[index].classList.add(strClass);
             };
 
-            const addDotes = () => {
-                for (let i = 0; i < slide.length; i++) {
-                    let dot = document.createElement('li');
-                    dot.className = 'dot';
-                    if (i === 0) {
-                        dot.classList.add('dot-active');
-                    }
-                    dots.appendChild(dot);
-                   
-                }
-               
-            };
-            addDotes();
-            let allDotes = document.querySelectorAll('.dot');
-           
-
             const replaySlider = () => {
                 if (currentSlide >= slide.length) {
                     currentSlide = 0;
                 } else if (currentSlide < 0) {
                     currentSlide = slide.length - 1;
                 }
-            };
-           
+            }
+
             const autoPlay = () => {
                 prevSlide(slide, currentSlide, 'portfolio-item-active');
-                prevSlide(allDotes, currentSlide, 'dot-active');
+                prevSlide(dot, currentSlide, 'dot-active');
                 currentSlide++;
                 replaySlider();
                 nextSlide(slide, currentSlide, 'portfolio-item-active');
-                nextSlide(allDotes, currentSlide, 'dot-active');
-               
+                nextSlide(dot, currentSlide, 'dot-active');    
             };
 
             const startSlider = (time = 5000) => {
@@ -218,16 +190,23 @@ window.addEventListener('DOMContentLoaded',  () => {
                };
 
                 prevSlide(slide, currentSlide, 'portfolio-item-active');
-                prevSlide(allDotes, currentSlide, 'dot-active');
+                prevSlide(dot, currentSlide, 'dot-active');
+
                 if ( target.matches('#arrow-right') ) {
                     currentSlide++;
                     replaySlider();
                 } else if ( target.matches('#arrow-left') ) {
                     currentSlide--;
-                    replaySlider() 
-                } 
+                    replaySlider();
+                } else if ( target.matches('.dot') ) {
+                    dot.forEach( (elem, index) => {
+                        if (elem === target) {
+                            currentSlide = index;
+                        }
+                    })
+                };
                 nextSlide(slide, currentSlide, 'portfolio-item-active');
-                nextSlide(allDotes, currentSlide, 'dot-active'); 
+                nextSlide(dot, currentSlide, 'dot-active');    
             });
 
             slider.addEventListener('mouseover', (event) => {
@@ -244,36 +223,12 @@ window.addEventListener('DOMContentLoaded',  () => {
             });
 
             startSlider(5000);
-           
         };
 
         slider();
 
-    // change image
-    const changeImg = () => {
-        let img = document.querySelectorAll('.command__photo');
-            img.forEach( (item) =>  {
-                let srcImg = item.src;
-                item.addEventListener('mouseover', () => {
-                    item.src = item.getAttribute('data-img');
-                });
-                item.addEventListener('mouseout', () => {
-                    item.src = srcImg;
-                });
-            }); 
-    };
-    changeImg();
-    
-    const calculate = () => {
-        const calcBlock = document.querySelector('.calc-block');
-        calcBlock.addEventListener('input', (event) => {
-            let target = event.target;
-            if (target.matches('.calc-item')) {
-                target.value.replace(/\d/, '');
-            }
-        })
-    };
-    calculate();
+       
+        
         
         
        
