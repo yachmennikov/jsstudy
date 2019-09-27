@@ -322,19 +322,23 @@ window.addEventListener('DOMContentLoaded',  () => {
                     let target = event.target;
 
                     const validInputs = () => {
-                        let input = target.querySelectorAll('input');
-                        input.forEach( (item) => {
-                            if (item.classList.contains('form-name')) {
-                                item.value = item.value.replace(/[^а-яё ]/g, '');
-                            }
-                            if (item.classList.contains('form-phone')) {
-                                item.value = item.value.replace(/\+?[78]([-()]*\d){10}/g, '')
-                            }
-                            if (item.classList.contains('form-email')) {
-                                item.value = item.value.replace(/\w+@\w+\.\w{2,3}/g, '')
-                            }
+                        document.addEventListener('input', (event) => {
+                                let target = event.target;
+                                if (target.classList.contains('form-name')) {
+                                    target.value = target.value.replace(/[^а-яё ]/g, '');
+                                } else {
+                                    target.value = '';
+                                    return;
+                                };
+                                if (target.classList.contains('form-phone')) {
+                                    target.value = target.value.replace(/\+?[78]([-()]*\d){10}/g, '')
+                                };
+                                if (target.classList.contains('form-email')) {
+                                    target.value = target.value.replace(/\w+@\w+\.\w{2,3}/g, '')
+                                }
                         });
-                    }
+                       
+                    };
                    validInputs();
 
                     if ( !target.matches('#form3') ) {
