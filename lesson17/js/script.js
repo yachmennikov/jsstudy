@@ -320,18 +320,22 @@ window.addEventListener('DOMContentLoaded',  () => {
                 document.addEventListener('submit', (event) => {
                     event.preventDefault();
                     let target = event.target;
-                    let input = target.querySelectorAll('input');
-                    input.forEach( (item) => {
-                        if (item.classList.contains('form-name')) {
-                            item.value = item.value.replace(/[^а-яё ]/gi, '');
-                        }
-                        if (item.classList.contains('form-phone')) {
-                            item.value = item.value.replace(/\+?[78]([-()]*\d){10}/g, '')
-                        }
-                        if (item.classList.contains('form-email')) {
-                            item.value = item.value.replace(/\w+@\w+\.\w{2,3}/g, '')
-                        }
-                    });
+
+                    const validInputs = () => {
+                        let input = target.querySelectorAll('input');
+                        input.forEach( (item) => {
+                            if (item.classList.contains('form-name')) {
+                                item.value = item.value.replace(/[^а-яё ]/g, '');
+                            }
+                            if (item.classList.contains('form-phone')) {
+                                item.value = item.value.replace(/\+?[78]([-()]*\d){10}/g, '')
+                            }
+                            if (item.classList.contains('form-email')) {
+                                item.value = item.value.replace(/\w+@\w+\.\w{2,3}/g, '')
+                            }
+                        });
+                    }
+                   validInputs();
 
                     if ( !target.matches('#form3') ) {
                         target.appendChild(statusMessage);
