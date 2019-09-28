@@ -324,20 +324,18 @@ window.addEventListener('DOMContentLoaded',  () => {
                     const validInputs = () => {
                         document.addEventListener('input', (event) => {
                                 let target = event.target;
-                                if (target.classList.contains('form-name')) {
-                                    target.value = target.value.replace(/[^а-яё ]/g, '');
-                                } else {
-                                    target.value = '';
-                                    return;
-                                };
-                                if (target.classList.contains('form-phone')) {
-                                    target.value = target.value.replace(/\+?[78]([-()]*\d){10}/g, '')
-                                };
-                                if (target.classList.contains('form-email')) {
-                                    target.value = target.value.replace(/\w+@\w+\.\w{2,3}/g, '')
-                                }
-                        });
-                       
+                               if(target.name = 'user_name') {
+                                   target.value = target.value.replace(/^а-яА-ЯёЁ/gi, '');
+                               } else if (target.name = 'user_phone'){
+                                   target.value = target.value.replace(/^0-9+/gi, '');
+                               } else if (target.name = 'user_email'){
+                                   target.value = target.value.replace(/^\w+@\w+\.w+$/g, '');
+                               } else if (target.name = 'user_massage'){
+                                   target.value = target.value.replace(/^а-яА-ЯёЁ/gi, '');
+                               } else {
+                                   return;
+                               }
+                        }); 
                     };
                    validInputs();
 
