@@ -317,27 +317,30 @@ window.addEventListener('DOMContentLoaded',  () => {
                 statusMessage = document.createElement('div');
                 statusMessage.style.cssText = `font-size: 1em`;
 
+                const validInputs = () => {
+                    document.addEventListener('input', (event) => {
+                            let item = event.target;
+                            if(item.classList.contains('form-name')) { 
+                                item.value = item.value.replace(/[^а-яА-ЯёЁ\ ]/g, '');
+                            } else if (item.classList.contains('form-phone')){
+                                item.value = item.value.replace(/[^0-9\+]/, '');
+                            } else if (item.classList.contains('form-email')){
+                                item.value = item.value.replace(/[^\w+@\w+.\w{2,3}]/g, '');
+                            } else if (item.classList.contains('mess')){
+                                item.value = item.value.replace(/[^а-яА-ЯёЁ\ ]/g, '');
+                            } else {
+                                return;
+                            }  
+                    }); 
+                };
+                validInputs();
+            
                 document.addEventListener('submit', (event) => {
                     event.preventDefault();
                     let target = event.target;
-
-                    const validInputs = () => {
-                        document.addEventListener('input', (event) => {
-                                let target = event.target;
-                               if(target.name = 'user_name') {
-                                   target.value = target.value.replace(/^а-яА-ЯёЁ/gi, '');
-                               } else if (target.name = 'user_phone'){
-                                   target.value = target.value.replace(/^0-9+/gi, '');
-                               } else if (target.name = 'user_email'){
-                                   target.value = target.value.replace(/^\w+@\w+\.w+$/g, '');
-                               } else if (target.name = 'user_massage'){
-                                   target.value = target.value.replace(/^а-яА-ЯёЁ/gi, '');
-                               } else {
-                                   return;
-                               }
-                        }); 
-                    };
-                   validInputs();
+                    validInputs();
+                   
+                
 
                     if ( !target.matches('#form3') ) {
                         target.appendChild(statusMessage);
@@ -383,7 +386,7 @@ window.addEventListener('DOMContentLoaded',  () => {
                             errorData(request.status); 
                         }
                         });
-                    request.open('POST', './server.php');
+                    request.open('POST', 'server.php');
                     request.setRequestHeader('Content-Type', 'application/json');
                     request.send(JSON.stringify(body));
                 };   
