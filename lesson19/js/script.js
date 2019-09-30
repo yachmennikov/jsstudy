@@ -318,7 +318,7 @@ window.addEventListener('DOMContentLoaded',  () => {
                 statusMessage.style.cssText = `font-size: 1em`;
 
                 const validInputs = () => {
-                document.addEventListener('input', (event) => {
+                    document.addEventListener('input', (event) => {
                             let item = event.target;
                             if(item.classList.contains('form-name')) { 
                                 item.value = item.value.replace(/[^а-яА-ЯёЁ\ ]/g, '');
@@ -352,40 +352,51 @@ window.addEventListener('DOMContentLoaded',  () => {
                       body[key] = val;
                   });
                   target.reset(); 
-                 postData(body).then( (result) => console.log(result),
-                 (reason) => console.log(reason) );
-            
+                  
+                 postData(body)
+                 .then( (response) => {
+                     if (response.status !== 200) {
+                         throw new Error('status is not equal to 200');
+                     }
+                     statusMessage.textContent = successMessage;
+                 })
+                 .catch( (error) => {
+                    statusMessage.textContent = errorMessage;
+                    console.error(error);
+                 });
+             
+                   
                   }  else {
                     const formData = new FormData(target);
                     let body = {};
                     formData.forEach( (val, key) => {
                         body[key] = val;
                     });
-                    target.reset(); 
-                    postData(body).then( (result) => console.log(result),
-                    (reason) => console.log(reason) );
+                    target.reset();
+                    const popup = document.querySelector('.popup');
+                    popup.style.display = 'none';
+                    postData(body).then( (response) => {
+                        if (response.status !== 200) {
+                            throw new Error('status is not equal to 200');
+                        }
+                        console.log('Success')
+                    }).catch( (error) => {
+                       console.error(error);
+                    });
                   }
                 });
         
 
                 const postData = (body) => {
-                   return new Promise( (resolve, reject) => {
-                       const request = new XMLHttpRequest();
-                       request.open('POST', './server.php');
-                       request.addEventListener('readystatechange', () => {
-                           if (request.readyState !== 4) {
-                               return
-                           };
-                           if (request.status === 200) {
-                               resolve(statusMessage.textContent = successMessage);
-                           } else {
-                               reject(statusMessage.textContent = errorMessage);
-                           }
-                       });
-                       request.setRequestHeader('Content-type', 'Application/json');
-                       request.send(JSON.stringify(body));
-                   });
-                };   
+                    return fetch('./server.php', {
+                            method: 'POST',
+                            mode: 'same-origin',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify(body)
+                        })
+                    };   
         };  
        
     sendForm();

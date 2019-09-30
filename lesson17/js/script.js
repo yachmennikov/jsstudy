@@ -317,8 +317,9 @@ window.addEventListener('DOMContentLoaded',  () => {
                 statusMessage = document.createElement('div');
                 statusMessage.style.cssText = `font-size: 1em`;
 
+               
                 const validInputs = () => {
-                    document.addEventListener('input', (event) => {
+                document.addEventListener('input', (event) => {
                             let item = event.target;
                             if(item.classList.contains('form-name')) { 
                                 item.value = item.value.replace(/[^а-яА-ЯёЁ\ ]/g, '');
@@ -327,6 +328,8 @@ window.addEventListener('DOMContentLoaded',  () => {
                             } else if (item.classList.contains('form-email')){
                                 item.value = item.value.replace(/[^\w+@\w+.\w{2,3}]/g, '');
                             } else if (item.classList.contains('mess')){
+                                item.value = item.value.replace(/[^а-яА-ЯёЁ\ ]/g, '');
+                            } else if (item.classList.contains('top-form')){
                                 item.value = item.value.replace(/[^а-яА-ЯёЁ\ ]/g, '');
                             } else {
                                 return;
@@ -338,9 +341,6 @@ window.addEventListener('DOMContentLoaded',  () => {
                 document.addEventListener('submit', (event) => {
                     event.preventDefault();
                     let target = event.target;
-                    validInputs();
-                   
-                
 
                     if ( !target.matches('#form3') ) {
                         target.appendChild(statusMessage);
